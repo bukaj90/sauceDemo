@@ -35,16 +35,27 @@ class TestSauceDemo:
         logout_btm = self.driver.wait.until(EC.visibility_of_element_located((By.ID, "logout_sidebar_link")))
         logout_btm.click()
 
-    def test_login(self):
-        self.login("standard_user", "secret_sauce")
+    @pytest.mark.parametrize("user_name, user_password, login_success", [
+        ("standard_user", "secret_sauce", True),
+        ("locked_out_user", "secret_sauce", False),
+    ], ids=["standard_user_login", "locked_out_user_login"])
+    def test_login(self, user_name,user_password, login_success):
+        self.login(user_name, user_password)
 
-        assert "inventory.html" in self.driver.current_url
+        if login_success:
+            assert "inventory.html" in self.driver.current_url
 
-        logo = self.driver.wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "app_logo")))
-        assert logo.text == 'Swag Labs'
+            logo = self.driver.wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "app_logo")))
+            assert logo.text == 'Swag Labs'
+        else:
+            error_msg = self.driver.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "[data-test='error']")))
+            assert error_msg.text == 'Epic sadface: Sorry, this user has been locked out.'
 
-    def test_logout(self):
-        self.login("standard_user", "secret_sauce")
+    @pytest.mark.parametrize("user_name, user_password",[
+        ("standard_user", "secret_sauce")
+    ])
+    def test_logout(self, user_name, user_password):
+        self.login(user_name, user_password)
         self.logout()
 
         login_logo = self.driver.wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "login_logo")))
