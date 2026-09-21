@@ -25,3 +25,31 @@ Co instalowane:
 Locust:
 - locust -f locustfile.py --users 50 --spawn-rate 5 --run-time 1m --headless --html results/report.html --csv results/statsats -> włączenienie testu z user:50 
 - start results/report.html -> sprawdzenie wyniku
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+## Instalacja
+
+Wymagania: Python 3.12, przeglądarka Firefox.
+
+```powershell
+git clone https://github.com/bukaj90/sauceDemo.git
+cd sauceDemo
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+Jeśli PowerShell blokuje aktywację środowiska, wpisz raz:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+## Uruchamianie testów
+
+Z aktywnym środowiskiem `(.venv)`:
+
+```powershell
+pytest test_login.py
+```
