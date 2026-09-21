@@ -6,14 +6,15 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 
+from config import BASE_URL, GLOBAL_WAIT, USERS
 class TestSauceDemo:
     @pytest.fixture(autouse=True)
     def setup_saucedemo(self):
         service = Service(GeckoDriverManager().install())
         self.driver = webdriver.Firefox(service=service)
         self.driver.maximize_window()
-        self.driver.wait = WebDriverWait(self.driver, 10)
-        self.driver.get("https://www.saucedemo.com/")
+        self.driver.wait = WebDriverWait(self.driver, GLOBAL_WAIT)
+        self.driver.get(BASE_URL)
 
         yield
         self.driver.quit()
@@ -36,8 +37,7 @@ class TestSauceDemo:
         logout_btm.click()
 
     @pytest.mark.parametrize("user_name, user_password, login_success", [
-        ("standard_user", "secret_sauce", True),
-        ("locked_out_user", "secret_sauce", False),
+        (dane["user_name"], dane["user_password"], dane["login_success"]) for dane in USERS.values() #comprehension list
     ], ids=["standard_user_login", "locked_out_user_login"])
     def test_login(self, user_name,user_password, login_success):
         self.login(user_name, user_password)
@@ -52,7 +52,8 @@ class TestSauceDemo:
             assert error_msg.text == 'Epic sadface: Sorry, this user has been locked out.'
 
     @pytest.mark.parametrize("user_name, user_password",[
-        ("standard_user", "secret_sauce")
+        (USERS["standard_user_login"]["user_name"],
+         USERS["standard_user_login"]["user_password"])
     ])
     def test_logout(self, user_name, user_password):
         self.login(user_name, user_password)
