@@ -23,5 +23,5 @@ Co instalowane:
 +++++++++++++++++++++++++++
 
 Locust:
-locust -f locustfile.py --users 50 --spawn-rate 5 --run-time 1m --headless --html results/report.html --csv results/statsats -> włączenienie testu z user:50 
-start results/report.html -> sprawdzenie wyniku
+- locust -f locustfile.py --users 50 --spawn-rate 5 --run-time 1m --headless --html results/report.html --csv results/statsats -> włączenienie testu z user:50 
+- start results/report.html -> sprawdzenie wyniku
