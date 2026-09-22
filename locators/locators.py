@@ -12,3 +12,6 @@ class InventoryPageLocator:
     @staticmethod
     def ADD_TO_CART_BUTTON(product_name):
         return (By.XPATH, f"//div[@class='inventory_item'][.//div[text()='{product_name}']]//button")
+
+class CartPageLocator:
+    INVENTORY_ITEM_NAME = (By.CSS_SELECTOR, "[data-test='inventory-item-name']")
