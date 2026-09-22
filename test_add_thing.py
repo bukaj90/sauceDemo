@@ -37,4 +37,6 @@ class TestAddThing:
         product_name = cart_page.get_product_name()
         assert product_name == 'Sauce Labs Backpack'
 
+        cart_page.checkout()
+
         time.sleep(3)

@@ -8,3 +8,7 @@ class CartPage:
     def get_product_name(self):
         product_element = self.driver.wait.until(EC.visibility_of_element_located(CartPageLocator.INVENTORY_ITEM_NAME))
         return product_element.text
+
+    def checkout(self):
+        chceckout  = self.driver.wait.until(EC.visibility_of_element_located(CartPageLocator.BUTTON_CHECKOUT))
+        chceckout.click()
