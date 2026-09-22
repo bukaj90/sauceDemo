@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from pages.login_page import LoginPage
-from pages.inwentory_page import InventoryPage
+from pages.inventory_page import InventoryPage
 
 from config import BASE_URL, GLOBAL_WAIT, USERS
 class TestSauceDemo:
