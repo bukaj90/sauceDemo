@@ -15,3 +15,7 @@ class InventoryPage:
     def add_product_to_cart(self, product_name):
         add_to_cart = self.driver.wait.until(EC.visibility_of_element_located(InventoryPageLocator.ADD_TO_CART_BUTTON(product_name)))
         add_to_cart.click()
+
+    def click_cart(self):
+        click_cart = self.driver.wait.until(EC.visibility_of_element_located(InventoryPageLocator.ICON_CART))
+        click_cart.click()

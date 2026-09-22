@@ -7,8 +7,8 @@ class LoginPageLocator:
 class InventoryPageLocator:
     REACT_BURGER_BTN = (By.ID, "react-burger-menu-btn")
     LOGOUT_SIDEBAR_LINK = (By.ID, "logout_sidebar_link")
+    ICON_CART = (By.CLASS_NAME, "shopping_cart_link")
 
-class InventoryPageLocator:
     @staticmethod
     def ADD_TO_CART_BUTTON(product_name):
         return (By.XPATH, f"//div[@class='inventory_item'][.//div[text()='{product_name}']]//button")

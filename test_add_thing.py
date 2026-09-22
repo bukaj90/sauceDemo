@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -29,3 +31,5 @@ class TestAddThing:
     def test_add_product_to_cart(self):
         inventory_page = InventoryPage(self.driver)
         inventory_page.add_product_to_cart("Sauce Labs Backpack")
+
+        time.sleep(2)
