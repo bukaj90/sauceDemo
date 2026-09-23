@@ -10,6 +10,7 @@ from config import BASE_URL, GLOBAL_WAIT, USERS
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
 from pages.checkout_overview_page import CheckoutOverviewPage
+from pages.order_confirmation_page import OrderConfirmationPage
 
 class TestAddThing:
 
@@ -48,5 +49,11 @@ class TestAddThing:
         assert total_price == 'Total: $32.39'
 
         checkout_overview_page.finish()
+
+        order_confirmation_page = OrderConfirmationPage(self.driver)
+        complete_order = order_confirmation_page.get_confirm_order()
+        assert complete_order == 'Thank you for your order!'
+
+        order_confirmation_page.generate_pdf()
 
         time.sleep(3)

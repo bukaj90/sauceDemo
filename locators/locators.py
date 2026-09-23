@@ -27,3 +27,7 @@ class CheckoutOverviewPageLocator:
     PRODUCT_NAME = (By.CSS_SELECTOR, "[data-test='inventory-item-name']")
     TOTAL_LABEL = (By.CSS_SELECTOR, "[data-test='total-label']")
     FINISH_BUTTON = (By.ID, "finish")
+
+class OrderConfirmationPageLocator:
+    COMPLETE_HEADER = (By.CSS_SELECTOR, "[data-test='complete-header']")
+    GENERATE_PDF_BUTTON = (By.ID, "generate-pdf-order")
