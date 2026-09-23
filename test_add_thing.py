@@ -1,16 +1,14 @@
 import time
-
 import pytest
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.support import expected_conditions as EC
-
 from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
 from config import BASE_URL, GLOBAL_WAIT, USERS
 from pages.cart_page import CartPage
+from pages.checkout_page import CheckoutPage
 
 class TestAddThing:
 
@@ -36,7 +34,9 @@ class TestAddThing:
         cart_page = CartPage(self.driver)
         product_name = cart_page.get_product_name()
         assert product_name == 'Sauce Labs Backpack'
-
         cart_page.checkout()
+
+        checkout_page = CheckoutPage(self.driver)
+        checkout_page.fill_checkout_form("Michał", "Tumus", "12-123 Zielonka")
 
         time.sleep(3)

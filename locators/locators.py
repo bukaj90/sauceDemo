@@ -16,3 +16,9 @@ class InventoryPageLocator:
 class CartPageLocator:
     INVENTORY_ITEM_NAME = (By.CSS_SELECTOR, "[data-test='inventory-item-name']")
     BUTTON_CHECKOUT = (By.ID, "checkout")
+
+class CheckoutPageLocator:
+    FIRST_NAME = (By.ID, "first-name")
+    LAST_NAME = (By.ID, "last-name")
+    ZIP_CODE = (By.ID, "postal-code")
+    CONTINUE_BUTTON = (By.ID, "continue")
