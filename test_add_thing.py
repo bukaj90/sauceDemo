@@ -9,6 +9,7 @@ from pages.login_page import LoginPage
 from config import BASE_URL, GLOBAL_WAIT, USERS
 from pages.cart_page import CartPage
 from pages.checkout_page import CheckoutPage
+from pages.checkout_overview_page import CheckoutOverviewPage
 
 class TestAddThing:
 
@@ -38,5 +39,14 @@ class TestAddThing:
 
         checkout_page = CheckoutPage(self.driver)
         checkout_page.fill_checkout_form("Michał", "Tumus", "12-123 Zielonka")
+
+        checkout_overview_page = CheckoutOverviewPage(self.driver)
+        check_product_name = checkout_overview_page.get_checkout_product_name()
+        assert  check_product_name == 'Sauce Labs Backpack'
+
+        total_price = checkout_overview_page.get_total()
+        assert total_price == 'Total: $32.39'
+
+        checkout_overview_page.finish()
 
         time.sleep(3)

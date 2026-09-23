@@ -22,3 +22,8 @@ class CheckoutPageLocator:
     LAST_NAME = (By.ID, "last-name")
     ZIP_CODE = (By.ID, "postal-code")
     CONTINUE_BUTTON = (By.ID, "continue")
+
+class CheckoutOverviewPageLocator:
+    PRODUCT_NAME = (By.CSS_SELECTOR, "[data-test='inventory-item-name']")
+    TOTAL_LABEL = (By.CSS_SELECTOR, "[data-test='total-label']")
+    FINISH_BUTTON = (By.ID, "finish")
