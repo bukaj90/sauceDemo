@@ -39,7 +39,7 @@ class TestAddThing:
         cart_page.checkout()
 
         checkout_page = CheckoutPage(self.driver)
-        checkout_page.fill_checkout_form("Michał", "Tumus", "12-123 Zielonka")
+        checkout_page.fill_checkout_form("Michal", "Tumus", "12-123 Zielonka")
 
         checkout_overview_page = CheckoutOverviewPage(self.driver)
         check_product_name = checkout_overview_page.get_checkout_product_name()
@@ -54,6 +54,5 @@ class TestAddThing:
         complete_order = order_confirmation_page.get_confirm_order()
         assert complete_order == 'Thank you for your order!'
 
-        order_confirmation_page.generate_pdf()
-
-        time.sleep(3)
+        pdf_url = order_confirmation_page.generate_pdf()
+        assert "blob:" in pdf_url or ".pdf" in pdf_url
