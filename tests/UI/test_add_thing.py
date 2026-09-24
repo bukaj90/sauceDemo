@@ -14,7 +14,7 @@ class TestAddThing:
 
     @pytest.fixture(autouse=True)
     def setup_add_thing(self):
-        self.driver =webdriver.Firefox
+        self.driver =webdriver.Firefox()
         try:
             self.driver.maximize_window()
             self.driver.wait = WebDriverWait(self.driver, GLOBAL_WAIT)

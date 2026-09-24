@@ -24,4 +24,10 @@ class OrderConfirmationPage:
         new_window = [window for window in self.driver.window_handles if window != original_window][0]
         self.driver.switch_to.window(new_window)
 
-        return self.driver.current_url
+        self.driver.wait.until(lambda d: d.current_url != "about:blank")
+        pdf_url = self.driver.current_url
+
+        self.driver.close()
+        self.driver.switch_to.window(original_window)
+
+        return pdf_url
