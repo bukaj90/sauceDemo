@@ -2,24 +2,24 @@ import allure
 from conftest import API_URL
 import requests
 
-@allure.title("Logowanie poprawnymi danymi zwraca token")
+@allure.title("Login with valid credentials returns a token")
 def test_login_returns_token(api):
     r = api.post(f"{API_URL}/auth/login",json={"username": "emilys", "password": "emilyspass"},timeout=10)
     assert r.status_code == 200
     assert "accessToken" in r.json()
 
-@allure.title("Logowanie błędnym hasłem zwraca 400")
+@allure.title("Login with a wrong password returns 400")
 def test_login_wrong_password(api):
     r = api.post(f"{API_URL}/auth/login",json={"username": "emilys", "password": "zle"},timeout=10)
     assert r.status_code == 400
 
-@allure.title("Endpoint chroniony działa z tokenem")
+@allure.title("Protected endpoint works with a valid token")
 def test_me_with_token(token):
     r = requests.get(f"{API_URL}/auth/me",headers={"Authorization": f"Bearer {token}"},timeout=10)
     assert r.status_code == 200
     assert r.json()["username"] == "emilys"
 
-@allure.title("Endpoint chroniony bez tokenu zwraca 401")
+@allure.title("Protected endpoint without a token returns 401")
 def test_me_without_token():
     r = requests.get(f"{API_URL}/auth/me", timeout=10)
     assert r.status_code == 401

@@ -6,12 +6,12 @@ class CartPage:
     def __init__(self, driver):
         self.driver = driver
 
-    @allure.step("Pobranie nazwy produktu z koszyka")
+    @allure.step("Get product name from the cart")
     def get_product_name(self):
         product_element = self.driver.wait.until(EC.visibility_of_element_located(CartPageLocator.INVENTORY_ITEM_NAME))
         return product_element.text
 
-    @allure.step("Przejście do checkoutu")
+    @allure.step("Proceed to checkout")
     def checkout(self):
         checkout = self.driver.wait.until(EC.visibility_of_element_located(CartPageLocator.BUTTON_CHECKOUT))
         checkout.click()

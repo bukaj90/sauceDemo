@@ -7,7 +7,7 @@ class CheckoutPage:
     def __init__(self, driver):
         self.driver = driver
 
-    @allure.step("Wypełnienie formularza checkout: {first_name} {last_name}, {zip_code}")
+    @allure.step("Fill in the checkout form: {first_name} {last_name}, {zip_code}")
     def fill_checkout_form(self, first_name, last_name, zip_code):
         add_first_name = self.driver.wait.until(EC.visibility_of_element_located(CheckoutPageLocator.FIRST_NAME))
         add_first_name.send_keys(first_name)

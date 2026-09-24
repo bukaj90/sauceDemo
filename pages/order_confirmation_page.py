@@ -6,12 +6,12 @@ class OrderConfirmationPage:
     def __init__(self, driver):
         self.driver = driver
 
-    @allure.step("Pobranie komunikatu potwierdzenia zamówienia")
+    @allure.step("Get order confirmation message")
     def get_confirm_order(self):
         confirm_order = self.driver.wait.until(EC.visibility_of_element_located(OrderConfirmationPageLocator.COMPLETE_HEADER))
         return confirm_order.text
 
-    @allure.step("Wygenerowanie PDF zamówienia")
+    @allure.step("Generate order PDF")
     def generate_pdf(self):
         original_window = self.driver.current_window_handle
         windows_before = self.driver.window_handles
