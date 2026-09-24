@@ -1,52 +1,52 @@
-# 🧪 sauceDemo — Framework do automatyzacji testów E2E i wydajnościowych
+# 🧪 sauceDemo — E2E and Performance Test Automation Framework
 
-Kompleksowy projekt testowy dla aplikacji [Sauce Demo](https://www.saucedemo.com/), łączący automatyzację testów funkcjonalnych (Selenium + pytest, wzorzec Page Object Model), testy wydajnościowe (Locust) oraz raportowanie wyników (Allure).
+A comprehensive test project for the [Sauce Demo](https://www.saucedemo.com/) application, combining functional test automation (Selenium + pytest, Page Object Model pattern), performance testing (Locust), and result reporting (Allure).
 
-Projekt powstał jako praktyczne ćwiczenie z automatyzacji testów — od podstawowego skryptu, przez parametryzację przypadków testowych, aż po pełną strukturę POM gotową do rozwoju w środowisku produkcyjnym.
-
----
-
-## 🚀 Funkcjonalności
-
-Framework pokrywa pełną ścieżkę użytkownika w sklepie internetowym:
-
-- ✅ **Logowanie** — walidacja poprawnych i błędnych danych logowania
-- ✅ **Nawigacja** — obsługa menu bocznego (hamburger menu)
-- ✅ **Dodawanie produktów** — dodanie wielu pozycji do koszyka
-- ✅ **Proces zakupowy** — przejście przez koszyk i finalizacja zamówienia
-- ✅ **Generowanie potwierdzenia PDF** — walidacja dokumentu wygenerowanego po zamówieniu
-- ✅ **Testy obciążeniowe logowania** — symulacja wielu równoczesnych użytkowników (Locust)
-
-Testy są sparametryzowane (pytest.mark.parametrize), co pozwala uruchamiać te same scenariusze dla różnych zestawów danych bez duplikowania kodu.
+The project was built as a hands-on exercise in test automation — starting from a basic script, moving through test case parametrization, and arriving at a full POM structure ready to grow in a production-like environment.
 
 ---
 
-## 🏗️ Architektura
+## 🚀 Features
 
-Projekt zbudowany jest w oparciu o wzorzec **Page Object Model (POM)**, co zapewnia:
+The framework covers the full user journey in the online store:
 
-- separację logiki testowej od logiki interakcji ze stroną,
-- łatwiejsze utrzymanie testów przy zmianach w UI,
-- czytelną, skalowalną strukturę kodu.
+- ✅ **Login** — validation of correct and incorrect login credentials
+- ✅ **Navigation** — handling the side menu (hamburger menu)
+- ✅ **Adding products** — adding multiple items to the cart
+- ✅ **Checkout process** — going through the cart and completing an order
+- ✅ **PDF confirmation generation** — validating the document generated after an order
+- ✅ **Login load testing** — simulating multiple concurrent users (Locust)
 
----
-
-## 🛠️ Stack technologiczny
-
-| Kategoria | Narzędzie |
-|---|---|
-| Język | Python 3.12 |
-| Automatyzacja przeglądarki | Selenium + webdriver-manager |
-| Framework testowy | pytest |
-| Testy wydajnościowe | Locust |
-| Raportowanie | Allure |
-| Przeglądarka | Firefox |
+Tests are parametrized (`pytest.mark.parametrize`), which allows the same scenarios to run against different data sets without duplicating code.
 
 ---
 
-## 📦 Instalacja
+## 🏗️ Architecture
 
-Wymagania: Python 3.12, przeglądarka Firefox.
+The project is built on the **Page Object Model (POM)** pattern, which provides:
+
+- separation of test logic from page interaction logic,
+- easier test maintenance when the UI changes,
+- a readable, scalable code structure.
+
+---
+
+## 🛠️ Tech stack
+
+| Category            | Tool                        |
+|---------------------|-----------------------------|
+| Language            | Python 3.12                 |
+| Browser automation  | Selenium (Selenium Manager) |
+| Test framework      | pytest                      |
+| Performance testing | Locust                      |
+| Reporting           | Allure                      |
+| Browser             | Firefox                     |
+
+---
+
+## 📦 Installation
+
+Requirements: Python 3.12, Firefox browser.
 
 ```powershell
 git clone https://github.com/bukaj90/sauceDemo.git
@@ -56,17 +56,19 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Jeśli PowerShell blokuje aktywację środowiska wirtualnego, wpisz jednorazowo:
+If PowerShell blocks activating the virtual environment, run this once:
 
 ```powershell
 Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 ```
 
+> ℹ️ Since version 4.6, Selenium ships with a built-in **Selenium Manager**, which automatically detects the installed browser and downloads the matching driver (`geckodriver`). No additional configuration or manual driver download is required.
+
 ---
 
-## ▶️ Uruchamianie testów
+## ▶️ Running tests
 
-Z aktywnym środowiskiem `(.venv)`:
+With the `(.venv)` environment active:
 
 ```powershell
 pytest test_login.py
@@ -74,48 +76,48 @@ pytest test_login.py
 
 ---
 
-## 📊 Raportowanie — Allure
+## 📊 Reporting — Allure
 
-Projekt wykorzystuje **Allure** do generowania czytelnych, interaktywnych raportów z przebiegu testów.
+The project uses **Allure** to generate clear, interactive test run reports.
 
-### Wymagania wstępne
+### Prerequisites
 
-Allure Commandline wymaga Javy:
+Allure Commandline requires Java:
 
 ```bash
 java -version
 ```
 
-### Instalacja
+### Installation
 
-**1. Biblioteka Pythona:**
+**1. Python library:**
 
 ```bash
 pip install allure-pytest
 pip freeze > requirements.txt
 ```
 
-**2. Allure Commandline (przez Scoop, Windows):**
+**2. Allure Commandline (via Scoop, Windows):**
 
 ```powershell
 irm get.scoop.sh | iex
 scoop install allure
 ```
 
-> ⚠️ Po instalacji Allure zrestartuj terminal (PATH odświeża się dopiero w nowym oknie).
+> ⚠️ Restart your terminal after installing Allure (PATH only refreshes in a new window).
 
 ```bash
 allure --version
 ```
 
-### Generowanie raportu
+### Generating a report
 
 ```bash
 pytest test_add_thing.py --alluredir=allure-results
 allure serve allure-results
 ```
 
-Aby wyczyścić poprzednie wyniki przed nowym uruchomieniem:
+To clear previous results before a new run:
 
 ```bash
 pytest --alluredir=allure-results --clean-alluredir
@@ -123,25 +125,25 @@ pytest --alluredir=allure-results --clean-alluredir
 
 ---
 
-## ⚡ Testy wydajnościowe — Locust
+## ⚡ Performance testing — Locust
 
-Testy obciążeniowe logowania symulują wielu równoczesnych użytkowników korzystających z aplikacji.
+Login load tests simulate multiple concurrent users interacting with the application.
 
-### Instalacja
+### Installation
 
 ```bash
 pip install locust
 ```
 
-### Uruchomienie testu
+### Running the test
 
 ```bash
 locust -f locustfile.py --users 50 --spawn-rate 5 --run-time 1m --headless --html results/report.html --csv results/stats
 ```
 
-Parametry: **50 użytkowników**, **5 nowych użytkowników/s**, czas trwania **1 minuta**.
+Parameters: **50 users**, **5 new users/s**, duration **1 minute**.
 
-### Podgląd wyników
+### Viewing results
 
 ```bash
 start results/report.html
@@ -149,38 +151,38 @@ start results/report.html
 
 ---
 
-## 📈 Wyniki testów wydajnościowych
+## 📈 Performance test results
 
-Test przeprowadzono na środowisku produkcyjnym `saucedemo.com` przy obciążeniu **50 jednoczesnych użytkowników** (spawn rate: 5 użytkowników/s, czas trwania: 1 minuta).
+The test was run against the production environment `saucedemo.com` under a load of **50 concurrent users** (spawn rate: 5 users/s, duration: 1 minute).
 
-> **Uwaga metodologiczna:** SauceDemo to aplikacja typu SPA — routing (`/inventory.html`, `/cart.html`) oraz logowanie realizowane są po stronie klienta (JavaScript), nie jako osobne endpointy backendu. Bezpośrednie żądania do tych ścieżek kończyły się błędami 404/405. Test wydajnościowy ograniczono więc do rzeczywistego zasobu serwowanego przez backend — `GET /` (strona logowania) — co dało wiarygodne wyniki obciążenia serwera.
+> **Methodology note:** SauceDemo is an SPA — routing (`/inventory.html`, `/cart.html`) and login are handled client-side (JavaScript), not as separate backend endpoints. Direct requests to these paths returned 404/405 errors. The performance test was therefore limited to the actual resource served by the backend — `GET /` (the login page) — which produced reliable results for server load.
 
-### Statystyki żądań
+### Request statistics
 
-| Endpoint | Liczba żądań | Błędy | Śr. czas | Min | Max | RPS |
-|---|---|---|---|---|---|---|
-| `GET /` | 1384 | **0** | 28,73 ms | 20 ms | 318 ms | 23,26 |
+| Endpoint | Requests | Failures | Avg. time | Min   | Max    | RPS   |
+|----------|----------|----------|-----------|-------|--------|-------|
+| `GET /`  | 1384     | **0**    | 28.73 ms  | 20 ms | 318 ms | 23.26 |
 
-### Percentyle czasu odpowiedzi
+### Response time percentiles
 
-| Percentyl | 50% | 60% | 70% | 80% | 90% | 95% | 99% | 100% |
-|---|---|---|---|---|---|---|---|---|
-| Czas (ms) | 25 | 25 | 26 | 28 | 33 | 56 | 96 | 320 |
+| Percentile | 50% | 60% | 70% | 80% | 90% | 95% | 99% | 100% |
+|------------|-----|-----|-----|-----|-----|-----|-----|------|
+| Time (ms)  | 25  | 25  | 26  | 28  | 33  | 56  | 96  | 320  |
 
-Do 90. percentyla czasy odpowiedzi mieszczą się w przedziale 20–33 ms — dopiero powyżej 95. percentyla widać wyraźniejszy wzrost, z pojedynczymi skrajnymi przypadkami sięgającymi 320 ms.
+Up to the 90th percentile, response times stay in the 20–33 ms range — only above the 95th percentile does a more noticeable increase appear, with a few extreme cases reaching 320 ms.
 
-### Wnioski
+### Conclusions
 
-- ✅ **0 błędów** na 1384 wysłanych żądań
-- ✅ Stabilny, niski średni czas odpowiedzi (~29 ms)
-- ✅ RPS narastał liniowo wraz z dochodzeniem do 50 użytkowników, po czym ustabilizował się na poziomie ~23–25 RPS bez oznak degradacji wydajności
+- ✅ **0 failures** out of 1384 requests sent
+- ✅ Stable, low average response time (~29 ms)
+- ✅ RPS grew linearly while ramping up to 50 users, then stabilized around ~23–25 RPS with no signs of performance degradation
 
-### Ograniczenia testu
+### Test limitations
 
-Ze względu na architekturę SPA test objął wyłącznie `GET /`. Obciążenie procesu logowania i nawigacji między podstronami wymagałoby narzędzia symulującego przeglądarkę (np. Selenium) lub identyfikacji rzeczywistych endpointów API wykorzystywanych przez frontend.
+Due to the SPA architecture, the test only covered `GET /`. Load-testing the login process and navigation between subpages would require a tool that simulates a real browser (e.g. Selenium), or identifying the actual API endpoints used by the frontend.
 
 ---
 
-## 👤 Autor
+## 👤 Author
 
-Projekt stworzony jako praktyczne portfolio z zakresu automatyzacji testów QA.
+Project built as a hands-on QA test automation portfolio piece.
