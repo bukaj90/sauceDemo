@@ -1,10 +1,9 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
-from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.support import expected_conditions as EC
+
 from pages.login_page import LoginPage
 from pages.inventory_page import InventoryPage
 
@@ -12,14 +11,14 @@ from config import BASE_URL, GLOBAL_WAIT, USERS
 class TestSauceDemo:
     @pytest.fixture(autouse=True)
     def setup_saucedemo(self):
-        service = Service(GeckoDriverManager().install())
-        self.driver = webdriver.Firefox(service=service)
-        self.driver.maximize_window()
-        self.driver.wait = WebDriverWait(self.driver, GLOBAL_WAIT)
-        self.driver.get(BASE_URL)
-
-        yield
-        self.driver.quit()
+        self.driver = webdriver.Firefox()
+        try:
+            self.driver.maximize_window()
+            self.driver.wait = WebDriverWait(self.driver, GLOBAL_WAIT)
+            self.driver.get(BASE_URL)
+            yield
+        finally:
+            self.driver.quit()
 
     @pytest.mark.parametrize("user_name, user_password, login_success", [
         (dane["user_name"], dane["user_password"], dane["login_success"]) for dane in USERS.values() #comprehension list
