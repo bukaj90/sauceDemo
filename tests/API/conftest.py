@@ -1,8 +1,6 @@
 import pytest
 import requests
-
-API_URL = "https://dummyjson.com"
-
+from config import API_URL
 @pytest.fixture(scope="session")
 def api():
     session = requests.Session()

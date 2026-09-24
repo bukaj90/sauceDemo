@@ -1,5 +1,5 @@
 import allure
-from conftest import API_URL
+from config import API_URL
 import requests
 
 @allure.title("Login with valid credentials returns a token")

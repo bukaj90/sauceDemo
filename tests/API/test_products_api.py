@@ -1,5 +1,5 @@
 import allure
-from conftest import API_URL
+from config import API_URL
 @allure.title("Products list contains required fields")
 def test_products_list(api):
     r = api.get(f"{API_URL}/products", timeout=10)

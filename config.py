@@ -1,4 +1,5 @@
 
+API_URL = "https://dummyjson.com"
 BASE_URL = "https://www.saucedemo.com/"
 GLOBAL_WAIT = 10
 USERS = {
