@@ -14,7 +14,7 @@ class TestAddThing:
 
     @pytest.fixture(autouse=True)
     def setup_add_thing(self):
-        self.driver =webdriver.Firefox()
+        self.driver = webdriver.Firefox()
         try:
             self.driver.maximize_window()
             self.driver.wait = WebDriverWait(self.driver, GLOBAL_WAIT)
@@ -37,7 +37,7 @@ class TestAddThing:
         cart_page.checkout()
 
         checkout_page = CheckoutPage(self.driver)
-        checkout_page.fill_checkout_form("Michal", "Tumus", "12-123 Zielonka")
+        checkout_page.fill_checkout_form("Michal", "Tumus", "12-123")
 
         checkout_overview_page = CheckoutOverviewPage(self.driver)
         check_product_name = checkout_overview_page.get_checkout_product_name()
