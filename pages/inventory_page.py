@@ -9,11 +9,11 @@ class InventoryPage:
 
     @allure.step("Log out the user")
     def logout(self):
-        menu_btm = self.driver.wait.until(EC.visibility_of_element_located(InventoryPageLocator.REACT_BURGER_BTN))
-        menu_btm.click()
+        menu_btn = self.driver.wait.until(EC.visibility_of_element_located(InventoryPageLocator.REACT_BURGER_BTN))
+        menu_btn.click()
 
-        logout_btm = self.driver.wait.until(EC.visibility_of_element_located(InventoryPageLocator.LOGOUT_SIDEBAR_LINK))
-        logout_btm.click()
+        logout_btn = self.driver.wait.until(EC.visibility_of_element_located(InventoryPageLocator.LOGOUT_SIDEBAR_LINK))
+        logout_btn.click()
 
     @allure.step("Add product to the cart: {product_name}")
     def add_product_to_cart(self, product_name):
